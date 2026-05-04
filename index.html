@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lakers Roster</title>
+    <title>Jugadores de la NBA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;700&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/card.css" />
+    <link rel="stylesheet" href="css/modal.css" />
 </head>
 
 <body>
@@ -18,9 +21,9 @@
         <div class="header-inner">
             <div class="header-brand">
                 <span class="brand-badge">2025–26</span>
-                <h1 class="brand-title">Lakers Roster</h1>
+                <h1 class="brand-title">Jugadores de la NBA</h1>
             </div>
-            <button class="btn-add" id="btnAdd">+ Add Player</button>
+            <button class="btn-add" id="btnAdd">+ Agregar Jugador</button>
         </div>
     </header>
 
@@ -34,7 +37,7 @@
                 <input type="text" id="searchInput" class="search-input" placeholder="Search player…" />
             </div>
             <div class="filter-wrap">
-                <button class="filter-btn active" data-pos="ALL">All</button>
+                <button class="filter-btn active" data-pos="ALL">Todos</button>
                 <button class="filter-btn" data-pos="PG">PG</button>
                 <button class="filter-btn" data-pos="SG">SG</button>
                 <button class="filter-btn" data-pos="SF">SF</button>
@@ -51,72 +54,70 @@
         </div>
     </main>
 
-    <!-- MODAL OVERLAY -->
-    <div class="modal-overlay hidden" id="modalOverlay">
-        <div class="modal" id="modal">
-            <button class="modal-close" id="modalClose">✕</button>
-            <h2 class="modal-title" id="modalTitle">Add Player</h2>
-
+    <!-- Player modal -->
+    <div class="modal-overlay hidden" id="playerOverlay">
+        <div class="modal">
+            <button class="modal-close" id="btnPlayerClose">✕</button>
+            <h2 class="modal-title" id="playerModalTitle">Agregar Jugador</h2>
             <form class="modal-form" id="playerForm">
-                <input type="hidden" id="playerId" />
+                <input type="hidden" id="fieldId" />
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Name</label>
+                        <label for="fieldName">Name</label>
                         <input type="text" id="fieldName" placeholder="LeBron James" required />
                     </div>
                     <div class="form-group">
-                        <label>Team</label>
+                        <label for="fieldTeam">Team</label>
                         <input type="text" id="fieldTeam" placeholder="Los Angeles Lakers" required />
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Position</label>
+                        <label for="fieldPosition">Posición</label>
                         <select id="fieldPosition" required>
-                            <option value="">Select…</option>
-                            <option value="PG">PG</option>
-                            <option value="SG">SG</option>
-                            <option value="SF">SF</option>
-                            <option value="PF">PF</option>
-                            <option value="C">C</option>
+                            <option value="">Selecciona…</option>
+                            <option value="PG">PG — Point Guard</option>
+                            <option value="SG">SG — Shooting Guard</option>
+                            <option value="SF">SF — Small Forward</option>
+                            <option value="PF">PF — Power Forward</option>
+                            <option value="C">C — Center</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Jersey #</label>
+                        <label for="fieldJersey">Jersey #</label>
                         <input type="number" id="fieldJersey" placeholder="23" required />
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Age</label>
+                        <label for="fieldAge">Edad</label>
                         <input type="number" id="fieldAge" placeholder="30" required />
                     </div>
                     <div class="form-group">
-                        <label>Nationality</label>
+                        <label for="fieldNationality">Nacionalidad</label>
                         <input type="text" id="fieldNationality" placeholder="USA" required />
                     </div>
                 </div>
 
                 <div class="form-row form-row--three">
                     <div class="form-group">
-                        <label>PPG</label>
+                        <label for="fieldPPG">PPG</label>
                         <input type="number" step="0.1" id="fieldPPG" placeholder="0.0" />
                     </div>
                     <div class="form-group">
-                        <label>APG</label>
+                        <label for="fieldAPG">APG</label>
                         <input type="number" step="0.1" id="fieldAPG" placeholder="0.0" />
                     </div>
                     <div class="form-group">
-                        <label>RPG</label>
+                        <label for="fieldRPG">RPG</label>
                         <input type="number" step="0.1" id="fieldRPG" placeholder="0.0" />
                     </div>
                 </div>
 
-                <!-- Image upload (only shown when editing) -->
-                <div class="form-group image-upload-group hidden" id="imageUploadGroup">
+                <div class="form-group hidden" id="imageUploadGroup">
                     <label>Photo</label>
                     <div class="image-upload-area" id="imageUploadArea">
                         <img id="imagePreview" class="image-preview hidden" src="" alt="preview" />
@@ -127,33 +128,38 @@
                                 <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor"
                                     stroke-width="1.5" />
                             </svg>
-                            <span>Click to upload image</span>
+                            <span>Click para subir imágen</span>
                         </div>
                         <input type="file" id="fieldImage" accept="image/jpeg,image/png,image/webp" />
                     </div>
                 </div>
 
                 <div class="form-actions">
-                    <button type="button" class="btn-cancel" id="btnCancel">Cancel</button>
-                    <button type="submit" class="btn-save" id="btnSave">Save Player</button>
+                    <button type="button" class="btn-cancel" id="btnPlayerCancel">Cancelar</button>
+                    <button type="submit" class="btn-save">Guardar Jugador</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- DELETE CONFIRM -->
+    <!-- Delete modal -->
     <div class="modal-overlay hidden" id="deleteOverlay">
         <div class="modal modal--sm">
-            <h2 class="modal-title">Delete Player</h2>
-            <p class="modal-text" id="deleteText">Are you sure?</p>
+            <button class="modal-close" id="btnDeleteClose">✕</button>
+            <h2 class="modal-title">Borrar Jugador</h2>
+            <p class="modal-text" id="deleteText"></p>
             <div class="form-actions">
-                <button class="btn-cancel" id="btnDeleteCancel">Cancel</button>
-                <button class="btn-delete" id="btnDeleteConfirm">Delete</button>
+                <button class="btn-cancel" id="btnDeleteCancel">Cancelar</button>
+                <button class="btn-delete" id="btnDeleteConfirm">Eliminar</button>
             </div>
         </div>
     </div>
 
+    <script src="js/config.js"></script>
     <script src="js/api.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/modal.js"></script>
     <script src="js/app.js"></script>
 </body>
 
