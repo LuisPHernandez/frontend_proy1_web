@@ -48,16 +48,35 @@ function buildCard(player, onEdit, onDelete) {
     card.innerHTML = `
     ${buildPhoto(player)}
     <div class="card-body">
-        <div class="card-number">${player.jersey_number}</div>
-        <div class="card-name">${player.name}</div>
-        <div class="card-team">${player.team}</div>
+      <div class="card-header">
+        <div class="card-number">#${player.jersey_number}</div>
         <div class="card-pos-badge">${player.position}</div>
-        <div class="card-actions">
-            <button class="card-btn card-btn--edit">Edit</button>
-            <button class="card-btn card-btn--delete">Delete</button>
+      </div>
+      <div class="card-name">${player.name}</div>
+      <div class="card-team">${player.team}</div>
+      <div class="card-nationality">${player.nationality}</div>
+
+      <div class="card-stats">
+        <div class="card-stat">
+          <span class="stat-value">${player.points_per_game}</span>
+          <span class="stat-label">PPG</span>
         </div>
+        <div class="card-stat">
+          <span class="stat-value">${player.rebounds_per_game}</span>
+          <span class="stat-label">RPG</span>
+        </div>
+        <div class="card-stat">
+          <span class="stat-value">${player.assists_per_game}</span>
+          <span class="stat-label">APG</span>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="card-btn card-btn--edit">Edit</button>
+        <button class="card-btn card-btn--delete">Delete</button>
+      </div>
     </div>
-    `;
+  `;
 
     card.querySelector(".card-btn--edit").addEventListener("click", (e) => {
         e.stopPropagation();
@@ -86,21 +105,20 @@ function buildCard(player, onEdit, onDelete) {
 function buildPhoto(player) {
     if (player.image_url) {
         return `
-        <img
-            class="card-photo"
-            src="${CONFIG.API_URL}${player.image_url}"
-            alt="${player.name}"
-            loading="lazy"
-        />
-        `;
+      <img
+        class="card-photo"
+        src="${CONFIG.API_URL}${player.image_url}"
+        alt="${player.name}"
+        loading="lazy"
+      />
+    `;
     }
-
     return `
     <div class="card-photo-placeholder">
-        <svg viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.2"/>
-            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-        </svg>
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
     </div>
-    `;
+  `;
 }

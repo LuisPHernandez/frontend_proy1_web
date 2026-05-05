@@ -63,7 +63,7 @@
     font-size: 42px;
     line-height: 1;
     color: var(--gold);
-    opacity: 0.18;
+    opacity: 0.75;
     pointer-events: none;
     user-select: none;
 }
@@ -131,4 +131,54 @@
     border-color: var(--danger);
     color: var(--danger);
     background: rgba(192, 57, 43, 0.05);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.card-nationality {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 2px;
+    letter-spacing: 0.03em;
+}
+
+.card-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding: 10px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.card-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+}
+
+.card-stat:not(:last-child) {
+    border-right: 1px solid var(--border);
+}
+
+.stat-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--text);
+    line-height: 1;
+}
+
+.stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
 }
