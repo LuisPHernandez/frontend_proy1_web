@@ -33,8 +33,9 @@
                     <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.5" />
                     <path d="M13 13l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                 </svg>
-                <input type="text" id="searchInput" class="search-input" placeholder="Search player…" />
+                <input type="text" id="searchInput" class="search-input" placeholder="Buscar jugador..." />
             </div>
+
             <div class="filter-wrap">
                 <button class="filter-btn active" data-pos="ALL">Todos</button>
                 <button class="filter-btn" data-pos="PG">PG</button>
@@ -43,13 +44,34 @@
                 <button class="filter-btn" data-pos="PF">PF</button>
                 <button class="filter-btn" data-pos="C">C</button>
             </div>
+
+            <div class="sort-wrap">
+                <select id="sortSelect" class="sort-select">
+                    <option value="">Ordenar por…</option>
+                    <option value="name">Nombre</option>
+                    <option value="age">Edad</option>
+                    <option value="points_per_game">PPG</option>
+                    <option value="assists_per_game">APG</option>
+                    <option value="rebounds_per_game">RPG</option>
+                    <option value="jersey_number">Jersey #</option>
+                </select>
+                <select id="orderSelect" class="sort-select">
+                    <option value="asc">Asc</option>
+                    <option value="desc">Desc</option>
+                </select>
+            </div>
         </div>
     </div>
 
     <main class="main-content">
         <div class="players-grid" id="playersGrid"></div>
         <div class="empty-state hidden" id="emptyState">
-            <p>No players found.</p>
+            <p>No se encontraron jugadores.</p>
+        </div>
+        <div class="pagination" id="pagination">
+            <button class="pagination-btn" id="btnPrev">← Anterior</button>
+            <span class="pagination-info" id="pageInfo">Página 1</span>
+            <button class="pagination-btn" id="btnNext">Siguiente →</button>
         </div>
     </main>
 

@@ -18,14 +18,29 @@ async function handleResponse(res) {
 }
 
 const api = {
-
     /**
      * Obtiene todos los jugadores.
-     * 
-     * @returns {Promise<Object[]>} Lista de jugadores.
+     * @param {Object} params - Parámetros de búsqueda y paginación.
+     * @param {number} [params.page=1] - Número de página.
+     * @param {number} [params.limit=10] - Límite de resultados por página.
+     * @param {string} [params.q] - Término de búsqueda.
+     * @param {string} [params.sort] - Campo para ordenar.
+     * @param {string} [params.order] - Orden (asc/desc).
+     * @returns {Promise<Object>} Lista de jugadores.
      */
-    getAll: () =>
-        fetch(`${CONFIG.API_URL}/players`).then(handleResponse),
+    getAll: async (params = {}) => {
+        const query = new URLSearchParams();
+
+        if (params.page) query.set("page", params.page);
+        if (params.limit) query.set("limit", params.limit);
+        if (params.q) query.set("q", params.q);
+        if (params.sort) query.set("sort", params.sort);
+        if (params.order) query.set("order", params.order);
+
+        const url = `${CONFIG.API_URL}/players?${query.toString()}`;
+        const res = await fetch(url);
+        return handleResponse(res);
+    },
 
     /**
      * Obtiene un jugador por su ID.

@@ -1,80 +1,81 @@
 /**
- * Lista global que almacena los jugadores cargados desde la API.
- * 
- * @type {Object[]}
+ * Lista global/local que guarda los jugadores actualmente mostrados.
+ *
+ * Se actualiza cada vez que los filtros reciben una nueva lista de jugadores
+ * desde la API.
+ *
+ * @type {Array<Object>}
  */
 let allPlayers = [];
 
 /**
- * Carga todos los jugadores desde la API y los renderiza en el UI.
- * 
- * - Actualiza la variable global `allPlayers`
- * - Llama a `renderPlayers` para mostrar los datos
- * 
- * @async
- * @returns {Promise<void>}
- */
-async function loadPlayers() {
-    try {
-        allPlayers = await api.getAll();
-        renderPlayers(allPlayers, onEdit, onDelete);
-    } catch (err) {
-        console.error("Error cargando jugadores:", err);
-    }
-}
-
-/**
- * Callback que se ejecuta después de una operación exitosa
- * (crear, editar o eliminar jugador).
- * 
- * - Recarga la lista de jugadores
- * 
- * @async
+ * Callback que se ejecuta cuando una acción dentro de los modales termina
+ * correctamente.
+ *
+ * Por ejemplo, después de crear, editar o eliminar un jugador, se vuelven
+ * a aplicar los filtros para refrescar la lista en pantalla.
+ *
  * @returns {Promise<void>}
  */
 async function onSuccess() {
-    await loadPlayers();
+    await filters.applyFilters(true);
 }
 
 /**
- * Callback al hacer click en "Edit" en una tarjeta.
- * 
- * - Abre el modal de edición
- * 
- * @param {Object} player - Jugador seleccionado.
+ * Abre el modal de edición para el jugador seleccionado.
+ *
+ * Esta función se pasa como callback a `renderPlayers`, para que cada card
+ * o fila de jugador pueda abrir su propio modal de edición.
+ *
+ * @param {Object} player - Jugador que se desea editar.
+ * @returns {void}
  */
 function onEdit(player) {
     modals.openEditModal(player);
 }
 
 /**
- * Callback al hacer click en "Delete" en una tarjeta.
- * 
- * - Abre el modal de confirmación de eliminación
- * 
- * @param {Object} player - Jugador seleccionado.
+ * Abre el modal de eliminación para el jugador seleccionado.
+ *
+ * Esta función se pasa como callback a `renderPlayers`, para que cada card
+ * o fila de jugador pueda abrir su propio modal de confirmación de borrado.
+ *
+ * @param {Object} player - Jugador que se desea eliminar.
+ * @returns {void}
  */
 function onDelete(player) {
     modals.openDeleteModal(player);
 }
 
 /**
- * Inicializa el sistema de modales.
- * 
- * - Retorna funciones para abrir modales
- * - Se pasa `onSuccess` para refrescar datos después de acciones
+ * Inicializa los modales de la aplicación.
+ *
+ * Se le pasa `onSuccess` para que los modales puedan refrescar la lista
+ * de jugadores después de una acción exitosa.
  */
 const modals = initModals(onSuccess);
 
 /**
- * Inicializa los filtros de jugadores.
- * 
- * - Usa `allPlayers` como fuente de datos
- * - Conecta callbacks de edición y eliminación
+ * Inicializa los filtros de búsqueda, posición, ordenamiento y paginación.
+ *
+ * `initFilters` recibe un callback que se ejecuta cada vez que se obtienen
+ * jugadores filtrados. Dentro de ese callback:
+ *
+ * - Se actualiza `allPlayers`.
+ * - Se renderiza la lista de jugadores.
+ * - Se pasan `onEdit` y `onDelete` para conectar los botones de cada jugador
+ *   con sus respectivos modales.
  */
-initFilters(() => allPlayers, onEdit, onDelete);
+const filters = initFilters((players) => {
+    allPlayers = players;
+    renderPlayers(players, onEdit, onDelete);
+});
 
 /**
- * Carga inicial de jugadores al iniciar la aplicación.
+ * Ejecuta la carga inicial de jugadores.
+ *
+ * Al iniciar la página, aplica los filtros actuales por primera vez.
+ * Como todavía no hay búsqueda ni filtros activos, normalmente carga
+ * la primera página de jugadores.
  */
-loadPlayers();
+filters.applyFilters();
