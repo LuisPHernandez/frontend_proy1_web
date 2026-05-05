@@ -1,0 +1,134 @@
+.player-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    animation: fadeIn 0.3s ease both;
+}
+
+.player-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold-dim);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(201, 168, 76, 0.15);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    background: var(--surface-2);
+}
+
+.card-photo-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--surface-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-photo-placeholder svg {
+    width: 56px;
+    height: 56px;
+    color: var(--text-dim);
+}
+
+.card-body {
+    padding: 14px 16px 16px;
+    border-top: 1px solid var(--border);
+    position: relative;
+}
+
+.card-number {
+    position: absolute;
+    top: -18px;
+    right: 12px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    line-height: 1;
+    color: var(--gold);
+    opacity: 0.18;
+    pointer-events: none;
+    user-select: none;
+}
+
+.card-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.card-team {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+}
+
+.card-pos-badge {
+    display: inline-block;
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-top: 8px;
+}
+
+.card-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.card-btn {
+    flex: 1;
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.card-btn--edit:hover {
+    border-color: var(--gold-dim);
+    color: var(--gold);
+    background: rgba(201, 168, 76, 0.05);
+}
+
+.card-btn--delete:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+    background: rgba(192, 57, 43, 0.05);
+}

@@ -1,0 +1,60 @@
+:root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dim: #8A6E2F;
+    --black: #0A0A0A;
+    --surface: #111111;
+    --surface-2: #1A1A1A;
+    --surface-3: #222222;
+    --border: #2A2A2A;
+    --text: #F0EDE6;
+    --text-muted: #888880;
+    --text-dim: #444440;
+    --danger: #C0392B;
+    --radius: 12px;
+    --radius-sm: 8px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    min-height: 100vh;
+    background-image: radial-gradient(ellipse 80% 40% at 50% -10%,
+            rgba(201, 168, 76, 0.07) 0%,
+            transparent 60%);
+}
+
+.hidden {
+    display: none !important;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--surface-3);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border);
+}

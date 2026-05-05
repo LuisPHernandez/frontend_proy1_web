@@ -1,0 +1,173 @@
+/* ─── Header ─────────────────────────────────────────────────── */
+.site-header {
+    border-bottom: 1px solid var(--border);
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand-badge {
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.brand-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    line-height: 1;
+}
+
+.btn-add {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-add:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+}
+
+.btn-add:active {
+    transform: translateY(0);
+}
+
+/* ─── Toolbar ────────────────────────────────────────────────── */
+.toolbar {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    position: sticky;
+    top: 72px;
+    z-index: 90;
+}
+
+.toolbar-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.search-wrap {
+    position: relative;
+    flex: 0 0 260px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.search-input {
+    width: 100%;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    padding: 8px 12px 8px 34px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-input::placeholder {
+    color: var(--text-dim);
+}
+
+.search-input:focus {
+    border-color: var(--gold-dim);
+}
+
+.filter-wrap {
+    display: flex;
+    gap: 6px;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.filter-btn:hover {
+    border-color: var(--gold-dim);
+    color: var(--gold);
+}
+
+.filter-btn.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+}
+
+/* ─── Grid ───────────────────────────────────────────────────── */
+.main-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+}
+
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 80px 0;
+    color: var(--text-muted);
+    font-size: 15px;
+}

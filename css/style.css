@@ -1,0 +1,640 @@
+/* ─── Variables ─────────────────────────────────────────────── */
+:root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dim: #8A6E2F;
+    --black: #0A0A0A;
+    --surface: #111111;
+    --surface-2: #1A1A1A;
+    --surface-3: #222222;
+    --border: #2A2A2A;
+    --text: #F0EDE6;
+    --text-muted: #888880;
+    --text-dim: #444440;
+    --danger: #C0392B;
+    --radius: 12px;
+    --radius-sm: 8px;
+}
+
+/* ─── Reset ──────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    min-height: 100vh;
+    background-image:
+        radial-gradient(ellipse 80% 40% at 50% -10%, rgba(201, 168, 76, 0.07) 0%, transparent 60%);
+}
+
+/* ─── Header ─────────────────────────────────────────────────── */
+.site-header {
+    border-bottom: 1px solid var(--border);
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand-badge {
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.brand-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    line-height: 1;
+}
+
+.btn-add {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-add:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+}
+
+.btn-add:active {
+    transform: translateY(0);
+}
+
+/* ─── Toolbar ────────────────────────────────────────────────── */
+.toolbar {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    position: sticky;
+    top: 72px;
+    z-index: 90;
+}
+
+.toolbar-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.search-wrap {
+    position: relative;
+    flex: 0 0 260px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.search-input {
+    width: 100%;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    padding: 8px 12px 8px 34px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-input::placeholder {
+    color: var(--text-dim);
+}
+
+.search-input:focus {
+    border-color: var(--gold-dim);
+}
+
+.filter-wrap {
+    display: flex;
+    gap: 6px;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.filter-btn:hover {
+    border-color: var(--gold-dim);
+    color: var(--gold);
+}
+
+.filter-btn.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+}
+
+/* ─── Grid ───────────────────────────────────────────────────── */
+.main-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+}
+
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* ─── Player Card ────────────────────────────────────────────── */
+.player-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    animation: fadeIn 0.3s ease both;
+    position: relative;
+}
+
+.player-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold-dim);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(201, 168, 76, 0.15);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    background: var(--surface-2);
+}
+
+.card-photo-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--surface-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-photo-placeholder svg {
+    width: 56px;
+    height: 56px;
+    color: var(--text-dim);
+}
+
+.card-body {
+    padding: 14px 16px 16px;
+    border-top: 1px solid var(--border);
+    position: relative;
+}
+
+.card-number {
+    position: absolute;
+    top: -18px;
+    right: 12px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    line-height: 1;
+    color: var(--gold);
+    opacity: 0.18;
+    pointer-events: none;
+    user-select: none;
+}
+
+.card-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.card-team {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+}
+
+.card-pos-badge {
+    display: inline-block;
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-top: 8px;
+}
+
+.card-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.card-btn {
+    flex: 1;
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.card-btn:hover {
+    border-color: var(--gold-dim);
+    color: var(--gold);
+    background: rgba(201, 168, 76, 0.05);
+}
+
+.card-btn--delete:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+    background: rgba(192, 57, 43, 0.05);
+}
+
+/* ─── Empty State ────────────────────────────────────────────── */
+.empty-state {
+    text-align: center;
+    padding: 80px 0;
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+/* ─── Modal ──────────────────────────────────────────────────── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: overlayIn 0.2s ease;
+}
+
+@keyframes overlayIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+.modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    width: 100%;
+    max-width: 520px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalIn 0.2s ease;
+}
+
+.modal--sm {
+    max-width: 380px;
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-size: 12px;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    color: var(--text);
+    border-color: var(--text-muted);
+}
+
+.modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+}
+
+.modal-text {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* ─── Form ───────────────────────────────────────────────────── */
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.form-row--three {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.form-group input,
+.form-group select {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    padding: 9px 12px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--gold-dim);
+}
+
+.form-group select {
+    appearance: none;
+    cursor: pointer;
+}
+
+.form-group input::placeholder {
+    color: var(--text-dim);
+}
+
+/* Image upload */
+.image-upload-area {
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    position: relative;
+}
+
+.image-upload-area:hover {
+    border-color: var(--gold-dim);
+}
+
+.image-upload-area input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    padding: 0;
+}
+
+.image-upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 24px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.image-upload-placeholder svg {
+    width: 32px;
+    height: 32px;
+}
+
+.image-preview {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────── */
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.btn-cancel {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    padding: 11px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.btn-cancel:hover {
+    border-color: var(--text-muted);
+    color: var(--text);
+}
+
+.btn-save {
+    flex: 2;
+    background: var(--gold);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--black);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    padding: 11px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-save:hover {
+    background: var(--gold-light);
+}
+
+.btn-delete {
+    flex: 2;
+    background: var(--danger);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    padding: 11px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-delete:hover {
+    background: #e74c3c;
+}
+
+/* ─── Utility ────────────────────────────────────────────────── */
+.hidden {
+    display: none !important;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--surface-3);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border);
+}
