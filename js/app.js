@@ -9,6 +9,13 @@
 let allPlayers = [];
 
 /**
+ * Inicializa el listener del botón de exportar.
+ */
+document.getElementById("btnExport").addEventListener("click", () => {
+    exportToCSV(allPlayers);
+});
+
+/**
  * Callback que se ejecuta cuando una acción dentro de los modales termina
  * correctamente.
  *
