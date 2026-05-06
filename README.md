@@ -4,6 +4,9 @@ Frontend del Proyecto 2 de Web. Es una aplicacion hecha con HTML, CSS y JavaScri
 
 Repositorio del backend: <https://github.com/LuisPHernandez/backend_proy1_web>
 
+Link al frontend corriendo en el servidor remoto: http://34.51.81.158/proyecto1/
+Link al backend corriendo en el servidor remoto: <http://34.51.81.158:8000>
+
 ## Tecnologias usadas
 
 - HTML
